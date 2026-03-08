@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda Virtual - Dashboard</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <h1>🏪 Tienda Virtual</h1>
+      <div class="navbar-info">
+        <span id="usuarioInfo"></span>
+        <button class="btn btn-danger" onclick="logout()">Cerrar Sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h2>📦 Gestión de Productos</h2>
+      <div class="search-section">
+        <input type="text" id="buscarInput" placeholder="🔍 Buscar productos..." class="search-input">
+        <button class="btn btn-secondary" onclick="buscarProductos()">Buscar</button>
+        <button class="btn btn-secondary" onclick="cargarProductos()">Limpiar Búsqueda</button>
+      </div>
+    </div>
+
+    <!-- Botón para crear producto (solo admin) -->
+    <div id="seccionCrearProducto" class="crear-producto-section" style="display: none;">
+      <button class="btn btn-success" onclick="mostrarFormularioCreate()">➕ Nuevo Producto</button>
+    </div>
+
+    <!-- Formulario para crear/editar producto -->
+    <div id="formularioProducto" class="formulario-modal" style="display: none;">
+      <div class="formulario-box">
+        <h3 id="tituloFormulario">Crear Nuevo Producto</h3>
+        <form id="formProducto">
+          <div class="form-group">
+            <label for="formNombre">Nombre del Producto:</label>
+            <input type="text" id="formNombre" required>
+          </div>
+
+          <div class="form-group">
+            <label for="formPrecio">Precio:</label>
+            <input type="number" id="formPrecio" step="0.01" min="0" required>
+          </div>
+
+          <div class="form-group">
+            <label for="formStock">Stock:</label>
+            <input type="number" id="formStock" min="0" required>
+          </div>
+
+          <div class="form-group">
+            <label for="formDescripcion">Descripción:</label>
+            <textarea id="formDescripcion" rows="4" required></textarea>
+          </div>
+
+          <div class="botones-form">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-danger" onclick="cerrarFormulario()">Cancelar</button>
+          </div>
+        </form>
+        <div id="mensajeFormulario" class="mensaje"></div>
+      </div>
+    </div>
+
+    <!-- Tabla de productos -->
+    <div class="tabla-container">
+      <table class="tabla-productos">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaProductosCuerpo">
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 20px;">Cargando productos...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="mensajeGeneral" class="mensaje"></div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/productos.js"></script>
+</body>
+</html>
